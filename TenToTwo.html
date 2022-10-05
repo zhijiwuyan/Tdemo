@@ -1,0 +1,81 @@
+<!--
+ * @Author: error: git config user.name && git config user.email & please set dead value or install git
+ * @Date: 2022-09-17 18:06:22
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2022-09-17 18:23:01
+ * @FilePath: \js 数据结构和算法？\十进制转二进制.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈的使用：十进制转二进制</title>
+</head>
+
+<body>
+    <script>
+        function Stack() {
+            //栈的属性
+            Stack.prototype.item = [];
+            //栈的操作
+            //先将元素压入栈
+            Stack.prototype.push = function(element) {
+                    this.item.push(element);
+                }
+                //从栈中取出元素
+            Stack.prototype.pop = function(element) {
+                    return this.item.pop();
+                }
+                //查看栈顶元素
+            Stack.prototype.peek = function(element) {
+                    return this.item[this.item.length - 1];
+                }
+                //判断栈是否为空
+            Stack.prototype.isEmpty = function(element) {
+                    return this.item.length === 0;
+                }
+                //获取栈中元素个数
+            Stack.prototype.size = function(element) {
+                    return this.item.length
+                }
+                //toString方法
+            Stack.prototype.toString = function(element) {
+                let result = '';
+                for (var i = 0; i < this.item.length; i++) {
+
+                    result += this.item[i] + ' '
+                }
+                return result;
+            }
+
+
+        }
+
+        function DtoB(dec) {
+            //1.定义栈对象
+            var stack = new Stack();
+            //2.循环操作
+            while (dec > 0) {
+                //获取余数入栈
+                stack.push(dec % 2);
+                //获取商 进行下次运输
+                dec = Math.floor(dec / 2);
+            }
+            //3。从栈中取数
+            var binString = ''
+            while (!stack.isEmpty()) {
+                binString += stack.pop();
+            }
+            return binString;
+        }
+        alert(DtoB(100))
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!--
+ * @Author: error: git config user.name && git config user.email & please set dead value or install git
+ * @Date: 2022-09-27 18:09:29
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2022-10-05 13:21:18
+ * @FilePath: \js 数据结构和算法？\优先队列的代码实现.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优先队列的代码实现</title>
+</head>
+
+<body>
+    <script>
+        // 封装优先级
+        function PriorityQueue() {
+            //在PriorityQueue内部创建一个类
+            function QueueElement(element, priority) {
+                this.element = element;
+                this.priority = priority;
+            }
+            //封装属性
+            this.item = {};
+            //实现插入方法
+            PriorityQueue.prototype.enqueue = function (element, priority) {
+                var queueElement = new QueueElement(element, priority)
+                // 判断是否为空
+                if (this.item.length == 0) {
+                    this.item.push(queueElement)
+                } else {
+                    var added = false;
+                    for (var i = 0; i < this.item.length; i++) {
+                        if (queueElement.priority < this.item[i].priority) {
+                            this.item.splice(i, 0, queueElement)
+                            added = true;
+                            break;
+                        }
+
+                    }
+                    if (!added) {
+                        //https://www.bilibili.com/video/BV1x7411L7Q7?p=20&spm_id_from=pageDriver&vd_source=3481b6484264df2cd9f08b2f634bf442 
+                        // Uncaught TypeError: this.item.push is not a function
+                        this.item.push(queueElement)
+                    }
+
+                }
+            }
+
+            //  删除前端
+            PriorityQueue.prototype.pop = function () {
+                this.item.shift();
+            }
+            // 查看前端
+            PriorityQueue.prototype.peek = function () {
+                return this.item[0]
+            }
+            // 查看是否为空
+            PriorityQueue.prototype.isEmpty = function () {
+                return this.item.length === 0
+            }
+            // 统计个数
+            PriorityQueue.prototype.size = function () {
+                return this.item.length
+            }
+            //toString 转字符串
+            PriorityQueue.prototype.toString = function () {
+                let result = ''
+                for (let index = 0; index < this.item.length; index++) {
+                    result += this.item[index] + ''
+
+                }
+                return result;
+            }
+        }
+
+        //调用
+        var pg = new PriorityQueue();
+        pg.enqueue('ava', 100)
+        pg.enqueue('aa', 10)
+        pg.enqueue('a', 1)
+        alert(pg)
+    </script>
+
+</body>
+
+</html>

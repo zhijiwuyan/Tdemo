@@ -1,0 +1,57 @@
+<!--
+ * @Author: error: git config user.name && git config user.email & please set dead value or install git
+ * @Date: 2022-09-19 21:15:10
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2022-09-19 21:35:53
+ * @FilePath: \js 数据结构和算法？\队列结构代码实现.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于数组 队列结构代码实现</title>
+</head>
+
+<body>
+    <script>
+        function Queue() {
+            this.item = [];
+            //添加
+            Queue.prototype.push = function (element) {
+                this.item.push(element);
+            }
+            //  删除前端
+            Queue.prototype.pop = function () {
+                this.item.shift();
+            }
+            // 查看前端
+            Queue.prototype.peek = function () {
+                return this.item[0]
+            }
+            // 查看是否为空
+            Queue.prototype.isEmpty = function () {
+                return this.item.length === 0
+            }
+            // 统计个数
+            Queue.prototype.size = function () {
+                return this.item.length
+            }
+            //toString 转字符串
+            Queue.prototype.toString = function () {
+                let result = ''
+                for (let index = 0; index < this.item.length; index++) {
+                    result += this.item[index] + ''
+
+                }
+                return result;
+            }
+        }
+        var queue = new Queue()
+    </script>
+</body>
+
+</html>

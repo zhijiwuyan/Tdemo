@@ -1,0 +1,189 @@
+<!--
+ * @Author: error: git config user.name && git config user.email & please set dead value or install git
+ * @Date: 2022-10-05 13:23:35
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2022-10-05 14:46:33
+ * @FilePath: \js 数据结构和算法？\链表.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单项链表的封装</title>
+</head>
+
+<body>
+    <script>
+        function LinkedList() {
+            // 内部类:节点类 中间节点 节点包含：data 和next   上一个next指向下一个data
+            function Node(data) {
+                this.data = data;
+                this.next = null;
+
+            }
+            // 头  head
+            this.head = null
+            //记录链表长度
+            this.length = 0;
+
+            //  append(element)末尾添加
+            LinkedList.prototype.append = function (data) {
+                var newNode = new Node(data)
+                if (this.length == 0) {//是第一个节点（链表为空）
+                    this.head = newNode
+                } else {//不是第一个节点
+
+                    var current = this.head;
+                    //节点是否为空
+                    while (current.next) {
+                        current = current.next
+                    }
+                    current.next = newNode
+                }
+                this.length += 1
+            }
+
+            // insert(position,element)按位置添加 
+            LinkedList.prototype.insert = function (position, data) {
+                //越界判断
+                if (position < 0 || position > this.length) return false
+                var newNode = new Node(data)
+
+                // 插入position==0 的位置
+                if (position == 0) {
+                    newNode.next = this.head;
+                    this.head = newNode
+                } else {// 插入position>1任意位置
+                    var index = 0
+                    var previous = null
+                    var current = this.head
+                    while (index++ < position) {
+                        previous = current
+                        current = current.next
+                    }
+                    newNode.next = current
+                    previous.next = newNode
+                }
+                this.length += 1
+                return true
+            }
+
+            // get(position)按位置获取元素 
+            LinkedList.prototype.get = function (position) {
+                //越界判断
+                if (position < 0 || position >= this.length) return null
+                //获取数据
+                var index = 0;
+                var current = this.head
+                while (index++ < position) {
+                    current = current.next
+                }
+                return current.data
+            }
+
+            // indexOf(element) 返回索引 没有则返回-1
+            LinkedList.prototype.indexOf = function (data) {
+                var index = 0;
+                var current = this.head
+
+                while (current) {
+                    if (current.data == data) {
+                        return index
+                    }
+                    index += 1
+                    current = current.next
+                }
+                return -1
+            }
+
+            // update(position,element)修改某个位置的元素 
+            LinkedList.prototype.update = function (position, newdata) {
+                //越界判断
+                if (position < 0 || position >= this.length) return false
+                var index = 0;
+                var current = this.head
+                while (index++ < position) {
+                    current = current.next
+
+                }
+                current.data = newdata
+                return true
+
+            }
+
+
+
+
+            // removeIndex(position)按照下标来删除
+            LinkedList.prototype.removeIndex = function (position) {
+                //越界判断
+                if (position < 0 || position >= this.length) return false
+
+                var current = this.head
+                if (position == 0) {//position是否为第一个
+                    this.head = this.head.next
+                } else {//position不是第一个
+                    var index = 0;
+                    var previous = null
+
+                    while (index++ < position) {
+                        previous = current
+                        current = current.next
+
+                    }
+                    previous.next = current.next
+                }
+                this.length -= 1;
+                return current.data
+            }
+            // remove(element)删除元素
+            LinkedList.prototype.remove = function (data) {
+                var position = this.indexOf(data)
+                return this.removeIndex(position)
+            }
+
+            // isEmpty()判断是否为空 
+
+            LinkedList.prototype.isEmpty = function () {
+                return this.length == 0
+            }
+            // size()判断长度
+
+            LinkedList.prototype.size = function () {
+                return this.length
+            }
+
+
+
+            // toString() 输出元素值
+            LinkedList.prototype.toString = function () {
+                var current = this.head
+                var listString = ''
+                while (current) {
+                    listString += current.data + '   '
+                    current = current.next
+                }
+                return listString
+            }
+            // 尾 null
+        }
+        var list = new LinkedList()
+        list.append('123456')
+        list.append('123')
+        list.append('1256')
+        list.update(0, 'aaa')
+        alert(list)
+        list.removeIndex(2)
+        alert(list)
+        list.remove('aaa')
+        alert(list)
+        alert(list.size())
+        alert(list.isEmpty())
+    </script>
+</body>
+
+</html>
